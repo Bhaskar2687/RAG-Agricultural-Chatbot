@@ -1,59 +1,124 @@
-# AI-Powered RAG Chatbot for Agricultural Advice
+🌱 Agri-Advisor: AI-Powered Smart Farming Assistant
+Agri-Advisor is a Retrieval-Augmented Generation (RAG) chatbot designed to assist farmers by providing accurate, localized agricultural advice. Unlike standard chatbots, it grounds its answers in verified PDF manuals to prevent misinformation, while featuring a "Smart Fallback" mechanism to handle general queries safely. It supports voice interaction in multiple Indian languages, making it accessible to rural users.
 
-## Project Overview
+🚀 Key Features
+📚 RAG-Based Knowledge Base: Upload farming guides (PDFs) to create a custom knowledge base. The bot retrieves exact fertilizer dosages, pest control methods, and sowing times from these documents.
 
-This project is a Retrieval-Augmented Generation (RAG) chatbot developed to provide agricultural advice by retrieving information from farming documents and generating context-aware responses.
+🧠 Smart Fallback & Anti-Hallucination: Uses a strict "Two-Step Verification" system. If the uploaded PDF (e.g., Chilli) does not match the user's query (e.g., Cotton), the bot automatically switches to "General AI Mode" to avoid citing false sources.
 
-The chatbot combines semantic search and Large Language Models (LLMs) to answer user queries accurately based on agricultural knowledge sources.
+🗣️ Multi-Lingual Voice Support:
 
-## Features
+Input: Listens to queries in English, Hindi, Telugu, Tamil, and Kannada.
 
-- Retrieval-Augmented Generation (RAG)
-- Semantic Search using Vector Embeddings
-- Document-based Question Answering
-- Agricultural Knowledge Assistance
-- Context-Aware Responses
-- User-Friendly Web Interface
+Output: Hybrid Voice Engine using Google TTS (for high-quality native languages) and Offline System Voice (for instant English response).
 
-## Technologies Used
+🌍 Language Translation: Automatically translates vernacular queries to English for processing and the response back to the user's native language.
 
-- Python
-- Flask
-- FAISS
-- DeepSeek LLM / LLM Integration
-- HTML
-- CSS
-- JavaScript
+💻 Modern UI: Responsive, glassmorphism-inspired interface with real-time status updates and weather integration.
 
-## Project Architecture
+🛠️ Tech Stack
+Frontend: HTML5, CSS3, JavaScript (Web Speech API).
 
-1. User submits a query
-2. Query is converted into embeddings
-3. Relevant agricultural documents are retrieved using FAISS
-4. Retrieved context is passed to the LLM
-5. Context-aware response is generated and displayed
+Backend: Python, Flask.
 
-## Installation
+AI & LLM: LangChain, DeepSeek-Chat (via OpenRouter), HuggingFace Embeddings.
 
-```bash
-git clone <repository-url>
-cd project-folder
-pip install -r requirements.txt
+Database: ChromaDB (Vector Store for PDFs), SQLite (Chat History).
+
+Audio: gTTS (Google Text-to-Speech), pyttsx3 (Offline TTS).
+
+Tools: pypdf, deep-translator, python-dotenv.
+
+📂 Project Structure
+Bash
+Agri-Advisor/
+│
+├── app.py                 # Main Flask Backend Server
+├── chatbot.py             # RAG Logic, LangChain & Prompt Engineering
+├── ingest.py              # Script to process PDFs and store in Vector DB
+├── requirements.txt       # List of Python dependencies
+├── .env                   # Environment variables (API Keys)
+│
+├── static/                # CSS, Images, and Audio files
+│   ├── images/            # Backgrounds and icons
+│   └── audio/             # Temporary generated audio files
+│
+├── templates/
+│   └── index.html         # Main User Interface
+│
+├── data/                  # Folder where uploaded PDFs are saved
+└── vector_db/             # ChromaDB storage (Auto-generated)
+⚙️ Installation & Setup
+1. Prerequisites
+Python 3.8 or higher installed.
+
+An API Key for DeepSeek (or OpenAI) via OpenRouter.
+
+2. Clone the Repository
+Bash
+git clone https://github.com/your-username/agri-advisor.git
+cd agri-advisor
+3. Create a Virtual Environment (Optional but Recommended)
+Bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+4. Install Dependencies
+Create a requirements.txt file with the following content, or install manually:
+
+Bash
+pip install flask langchain langchain-huggingface langchain-chroma langchain-openai python-dotenv gTTS pyttsx3 deep-translator pypdf sentence-transformers
+5. Configure Environment Variables
+Create a file named .env in the root folder and add your API key:
+
+Ini, TOML
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
+LLM_MODEL=deepseek/deepseek-chat
+▶️ Usage Guide
+1. Start the Server
+Run the application using Python:
+
+Bash
 python app.py
-```
+You should see: 🚀 Starting Smart Agri-Bot Server...
 
-## Future Enhancements
+2. Access the App
+Open your browser and go to: http://127.0.0.1:5001
 
-- Multilingual Support
-- Voice-Based Query System
-- Mobile Application Integration
-- Real-Time Agricultural Data Integration
+3. How to Demo
+Upload Knowledge: Click the Paperclip Icon and upload a PDF (e.g., cotton_guide.pdf). Wait for the "✅ Learned!" notification.
 
-## Team Members
+Ask Specifics: Type or speak: "What are the pests in Cotton?". The bot will answer citing the PDF.
 
-- Bhaskar
-- Team Members
+Test Fallback: Ask about a crop you didn't upload (e.g., "How to grow Wheat?"). The bot will answer using General Knowledge and remove the citation.
 
-## Academic Project
+Test Voice: Select "Tamil" from the dropdown, click the Mic, and speak in Tamil.
 
-Final Year B.Tech Project – Computer Science and Engineering
+⚠️ Troubleshooting
+Error: ModuleNotFoundError: No module named 'PyPDF2'
+
+Fix: Run pip install pypdf (or PyPDF2).
+
+Voice is not working for Tamil/Telugu?
+
+Ensure you have an active internet connection (as native languages use Google TTS).
+
+For the "Offline" mode, ensure your Windows Language Settings have the specific Language Pack installed.
+
+"Quota Exceeded" / API Errors:
+
+Check your .env file and ensure your OpenRouter API key has credits.
+
+🔮 Future Scope
+📱 WhatsApp Integration: Deploying the bot on WhatsApp using Twilio API for easier access.
+
+📸 Disease Detection: Integrating Computer Vision (CNNs) to diagnose plant diseases from leaf photos.
+
+☁️ Cloud Deployment: Hosting the application on AWS or Render for public access.
+
+📜 License
+This project is developed for educational purposes as a Final Year B.Tech Project.
+
+Developed by: [R Jai Krishna] Batch: [2022-2026]

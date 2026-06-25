@@ -1,3 +1,4 @@
+
 import os
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -98,3 +99,4 @@ def ask_bot(query):
         
     except Exception as e:
         return f"Error: {str(e)}", []
+
